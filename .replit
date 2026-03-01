@@ -1,0 +1,67 @@
+modules = ["python-3.11"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["glibcLocales", "openssl"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Flask Server"
+
+[[workflows.workflow]]
+name = "Flask Server"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python app.py"
+waitForPort = 5000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 37033
+externalPort = 4200
+
+[[ports]]
+localPort = 39317
+externalPort = 5173
+
+[[ports]]
+localPort = 40189
+externalPort = 3001
+
+[[ports]]
+localPort = 40467
+externalPort = 5000
+
+[[ports]]
+localPort = 43425
+externalPort = 6000
+
+[[ports]]
+localPort = 43469
+externalPort = 6800
+
+[[ports]]
+localPort = 44261
+externalPort = 3003
+
+[[ports]]
+localPort = 46785
+externalPort = 3000
