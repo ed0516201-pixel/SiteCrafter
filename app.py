@@ -12,7 +12,7 @@ from telethon.tl.types import InputPeerUser
 import secrets  # For secure session naming
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SESSION_SECRET', secrets.token_hex(16))
+app.secret_key = os.environ.get('yGfqXco3Ci6+yYNZRs26pmu06uVyTUSAZsPzuzZ5li7sDxosksKN4hstpVe/jw/9Os1QjuHdxhI8rnjSxwBVCg==', secrets.token_hex(16))
 
 # Get credentials from environment variables (get from my.telegram.org)
 API_ID_STR = os.environ.get('25509235', '').strip()
@@ -2320,3 +2320,4 @@ if __name__ == '__main__':
     import os
 
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=False)
+
