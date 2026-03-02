@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram File Sender - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h1>File Sender Dashboard</h1>
+            <a href="/logout" class="nav-link">Logout</a>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" enctype="multipart/form-data" action="/upload">
+            <h2>Upload File or Enter Data</h2>
+            <label>XLSX, CSV or TXT File:</label>
+            <input type="file" name="file" accept=".xlsx,.csv,.txt">
+            <label>Or Enter Manual Data:</label>
+            <textarea name="manual_data" placeholder="Enter data line by line (one per line)"></textarea>
+            <label>Recipient:</label>
+            <input type="text" name="recipient" placeholder="@username or @botname" value="wsotp200bot" required>
+            
+            <label>Send Mode:</label>
+            <div style="margin: 10px 0;">
+                <input type="radio" id="columns" name="send_mode" value="columns" checked>
+                <label for="columns" style="display: inline; margin-left: 5px; margin-right: 20px;">Column by Column (each column separately)</label>
+                <input type="radio" id="rows" name="send_mode" value="rows">
+                <label for="rows" style="display: inline; margin-left: 5px;">Row by Row (combine columns per row)</label>
+            </div>
+            
+            <label>Skip First Numbers:</label>
+            <div style="margin: 10px 0;">
+                <select name="skip_count" style="padding: 8px 15px; font-size: 14px; border-radius: 5px; border: 1px solid #ccc; background: #2c2c54; color: white; cursor: pointer; width: 100%;">
+                    <option value="0">No Skip (Start from beginning)</option>
+                    {% for i in range(100, 10100, 100) %}
+                    <option value="{{ i }}">Skip first {{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit" id="sendButton">Send to Recipient</button>
+            
+            <div id="sendingStatus" class="sending-status">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: #4a90e2;" id="statusText">📤 Sending Messages...</h3>
+                    <button type="button" id="stopButton" class="stop-button pulse">🛑 Stop Sending</button>
+                </div>
+                
+                <div style="margin: 15px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                        <span id="progressInfo">Progress: 0/0</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <!-- Prominent Total Messages Sent Display -->
+                <div style="background: linear-gradient(135deg, #27ae60, #2ecc71); border-radius: 12px; padding: 20px; margin: 15px 0; text-align: center; box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);">
+                    <div style="color: white; font-size: 14px; margin-bottom: 5px; font-weight: 500;">📨 TOTAL MESSAGES SENT</div>
+                    <div style="color: white; font-size: 36px; font-weight: bold; font-family: 'Arial', sans-serif;" id="totalMessagesSent">0</div>
+                    <div style="color: rgba(255,255,255,0.9); font-size: 12px; margin-top: 5px;">This Session</div>
+                </div>
+
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div class="status-value success-count" id="successCount" style="font-size: 24px; color: #27ae60;">0</div>
+                        <div>✅ Sent Successfully</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value error-count" id="failedCount" style="font-size: 24px; color: #e74c3c;">0</div>
+                        <div>❌ Failed</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value" id="sendingSpeed" style="font-size: 20px; color: #3498db;">0</div>
+                        <div>📊 Messages/min</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value" id="timeRemaining" style="font-size: 20px; color: #9b59b6;">--:--</div>
+                        <div>⏱️ Est. Remaining</div>
+                    </div>
+                </div>
+                
+                <div class="progress-info">
+                    <strong>📱 Recipient:</strong> <span id="currentRecipient">--</span><br>
+                    <strong>🔄 Mode:</strong> <span id="sendMode">--</span><br>
+                    <strong>💬 Current:</strong> <span id="currentNumber">--</span><br>
+                    <strong>📨 Last Sent:</strong> <span id="lastMessageSent" style="font-family: monospace; font-size: 12px;">--</span>
+                </div>
+            </div>
+                </form>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

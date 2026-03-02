@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram File Sender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Telegram File Sender</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% if not code_requested %}
+            <form method="POST" action="/request_code">
+                <h2>Connect to Telegram</h2>
+                <input type="text" name="phone" placeholder="Enter phone number with country code (e.g., +1234567890)" required>
+                <button type="submit">Request Login Code</button>
+            </form>
+        {% else %}
+            <form method="POST" action="/login">
+                <h2>Enter Telegram Code</h2>
+                <p>Code sent to: {{ phone_number }}</p>
+                <input type="text" name="code" placeholder="Enter code from Telegram app" required>
+                <button type="submit">Login</button>
+            </form>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

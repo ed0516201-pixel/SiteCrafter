@@ -1,0 +1,38 @@
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0c0c3b, #1a1a5e, #0f0f4f); /* Blue anime night sky gradient */
+            background-size: 400% 400%;
+            animation: animeWave 15s ease infinite; /* Subtle anime-style wave animation */
+            color: white;
+            min-height: 100vh;
+        }
+        @keyframes animeWave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container { max-width: 600px; margin: 0 auto; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; }
+        input, textarea, button { width: 100%; padding: 10px; margin: 10px 0; border: none; border-radius: 5px; }
+        textarea { height: 100px; }
+        button { background: #4a90e2; color: white; cursor: pointer; }
+        button:hover { background: #357abd; }
+        .error { color: #ff6b6b; }
+        .success { color: #51cf66; }
+        .nav-link { display: inline-block; padding: 10px 15px; margin: 5px; background: #2c2c54; border-radius: 5px; text-decoration: none; color: white; }
+        .nav-link:hover { background: #40407a; }
+        .stop-button { background: #e74c3c !important; margin-top: 10px; }
+        .stop-button:hover { background: #c0392b !important; }
+        .stop-button:disabled { background: #666 !important; cursor: not-allowed; }
+        .sending-status { padding: 15px; margin: 15px 0; border-radius: 8px; background: rgba(255,255,255,0.1); display: none; border-left: 4px solid #4a90e2; }
+        .progress-info { color: #51cf66; font-weight: bold; margin: 8px 0; }
+        .progress-bar { width: 100%; height: 20px; background: rgba(255,255,255,0.2); border-radius: 10px; margin: 10px 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #4a90e2, #51cf66); transition: width 0.3s ease; }
+        .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+        .status-item { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 5px; text-align: center; }
+        .status-value { font-size: 18px; font-weight: bold; color: #51cf66; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .error-count { color: #ff6b6b !important; }
+        .success-count { color: #51cf66 !important; }
