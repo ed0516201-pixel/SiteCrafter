@@ -15,12 +15,12 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SESSION_SECRET', secrets.token_hex(16))
 
 # Get credentials from environment variables (get from my.telegram.org)
-API_ID_STR = os.environ.get('TELEGRAM_API_ID', '').strip()
-API_HASH_STR = os.environ.get('TELEGRAM_API_HASH', '').strip()
+API_ID_STR = os.environ.get('25509235', '').strip()
+API_HASH_STR = os.environ.get('d3629ab967e8ecac197831192aa36d65', '').strip()
 
 # Store credentials globally, will be set when available
 API_ID = 25509235
-API_HASH = '1f64f43c3937da9548f07a107849e794'
+API_HASH = 'd3629ab967e8ecac197831192aa36d65'
 
 @app.route('/')
 def index():
@@ -2318,4 +2318,5 @@ if __name__ == '__main__':
         print(f"  {status} '{test_input}' -> '{result}' (expected: '{expected}')")
     
     import os
+
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=False)
